@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>    
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Quiz | Coding Knowledge</title>
+    <!-- bootstrap style sheet -->
+    <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <!-- local style sheet -->
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css"/>
+</head>
+
+<body>
+
+    <header>
+
+        <div class="container m-3 p3 top">
+
+            <div class="row">
+
+                <div class="col-sm-3" id="high-score">
+                    High Score
+                </div>
+
+                <div class="col-sm-6">
+                    
+                    <h1>Coding Knowledge Quiz</h1>
+                    
+                </div>
+
+                <div class="col-sm-3" id="timer">Timer: <span id="timer-value"></span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </header>
+
+    <main>
+
+        <div class="container m-3 p-3 mx-auto quiz-area">
+
+            <div class="row">
+
+                <div class="col-lg-10 m-3 p-3">
+
+                    <h2>Question <span id="question-number"></span></h2>
+
+                    <div id="question"></div>
+                    <div>a. <span id="a"></span></div>
+                    <div>b. <span id="b"></span></div>
+                    <div>c. <span id="c"></span></div>
+                    <div>d. <span id="d"></span></div>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+    <footer>
+
+    </footer>
+
+    <script type="text/javascript" src="./assets/js/script.js"></script>
+
+</body>
+
+</html>

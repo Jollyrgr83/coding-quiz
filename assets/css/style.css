@@ -1,0 +1,29 @@
+.top {
+    max-width: 95%;
+    width: 95%;
+}
+
+#high-score {
+    text-align: start;
+}
+
+#timer {
+    text-align: end;
+}
+
+body {
+    background-color: whitesmoke;
+}
+
+.quiz-area {
+    background-color: white;
+    box-shadow: 5px 5px 5px lightgray;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+
+}
