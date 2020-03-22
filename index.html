@@ -11,114 +11,85 @@
 </head>
 
 <body>
-
+    <!-- header contains high scores, timer, and title elements -->
     <header>
-
-        <div class="container m-3 p3 top">
-
+        <div class="container m-3 p3 mx-auto top">
             <div class="row">
-
-                <div class="col-sm-3" id="high-score">
-                    High Scores
-                </div>
-
-                <div class="col-sm-6">
-                    
+                <!-- high scores link -->
+                <div class="col-sm-3" id="high-scores">High Scores</div>
+                <!-- title -->
+                <div class="col-sm-6">                 
                     <h1>Coding Knowledge Quiz</h1>
-                    
                 </div>
-
-                <div class="col-sm-3" id="timer">Timer: <span id="timer-value"></span>
-                </div>
-
+                <!-- timer -->
+                <div class="col-sm-3" id="timer">Timer: <span id="timer-value"></span></div>
             </div>
-
         </div>
-
-
     </header>
 
     <main>
-
-
-        <!-- start screen: this section contains the quiz instructions and start button. It should be hidden during the quiz screen, high score screen, and end screen. -->
-        
-        <div class="container m-3 mx-auto" id="start-screen">
+        <!-- start screen: this section contains the quiz instructions and start button -  hidden during the quiz, high score, and end screens -->      
+        <div class="container m-3 p-3 mx-auto" id="start-screen">
             <div class="row">
-                <div class="col-lg-10 m-3 px-3">
-                    <div></div>
-
-                    <div class="py-3"></div>
-                    
-                    <div>
-                        <button id="" class="answer py-2"></button>         
+                <div class="col-lg-12 m-3 mx-auto px-3">
+                    <!-- welcome message and instructions -->
+                    <div class="welcome mx-auto">
+                        <h2>Welcome to the Coding Quiz</h2>
+                        <p>You will be asked 10 questions to test your coding knowledge. Correct answers will add 10 points to your score and 10 seconds to your remaining time. Incorrect answers will subtract 10 points from your score and 10 seconds from your remaining time.  Press the start button to begin.</p>
+                        <!-- start button -->
+                        <div class="mx-auto">
+                        <button type="button" id="start-button" class="btn mx-auto">Start</button>         
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- quiz screen: this section contains the quiz questions, answers, and input buttons.  It should be hidden during the start screen, end screen, and high score screen. -->
-
+        <!-- quiz screen: this section contains the quiz questions, answers, and input buttons - hidden during the start, end, and high score screens -->
         <div class="container m-3 mx-auto" id="quiz-screen">
             <div class="row">
                 <div class="col-lg-10 m-3 px-3">
+                    <!-- question title - displays the question number -->
                     <div class="question-title">Question <span id="question-number"></span></div>
-
+                    <!-- question - displays the text of the question -->
                     <div id="question" class="py-3"></div>
-                    
+                    <!-- answers section - diplays the answers and buttons -->
                     <div id="answers">
                         <button id="a" class="answer py-2"></button>
-                    
                         <button id="b" class="answer py-2"></button>
-                    
                         <button id="c" class="answer py-2"></button>
-                    
                         <button id="d" class="answer py-2"></button>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- end screen: this section contains the final score and inputs for entering high score information. It should be hidden during the start screen, quiz, and high score screen. -->
-        
+        <!-- end screen: this section contains the final score and high score inputs - hidden during the start, quiz, and high score screens -->        
         <div class="container m-3 mx-auto" id="end-screen">
             <div class="row">
                 <div class="col-lg-10 m-3 px-3">
-                    <div class="question-title">Question <span id="question-number"></span></div>
-
-                    <div id="question" class="py-3"></div>
-                    
-                    <div id="answers">
-                        <button id="a" class="answer py-2"></button>
-                    
-                        <button id="b" class="answer py-2"></button>
-                    
-                        <button id="c" class="answer py-2"></button>
-                    
-                        <button id="d" class="answer py-2"></button>
+                     <!-- congratulations message and score -->
+                     <div class="welcome mx-auto">
+                        <h2>Congratulations!</h2>
+                        <p id="final-score-message">You finished with a final score of: <span id="final-score"></span></p>
+                        <!-- high score inputs -->
+                        <div class="mx-auto">
+                            <input type="text" placeholder="please enter your initials" id="initials-input" class="py-3"/>
+                        </div>
+                        <div class="mx-auto py-3">
+                            <button type="submit" id="submit-button" class="btn mx-auto">Submit</button>         
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-
-        <!-- high score screen: this section contains the high scores. It should be hidden during the start screen, quiz screen, and end screen. -->
-        
+        <!-- high score screen: this section contains the high scores - hidden during the start, quiz, and end screens -->   
         <div class="container m-3 mx-auto" id="high-score-screen">
             <div class="row">
                 <div class="col-lg-10 m-3 px-3">
-                    <div class="question-title">Question <span id="question-number"></span></div>
-
-                    <div id="question" class="py-3"></div>
-                    
-                    <div id="answers">
-                        <button id="a" class="answer py-2"></button>
-                    
-                        <button id="b" class="answer py-2"></button>
-                    
-                        <button id="c" class="answer py-2"></button>
-                    
-                        <button id="d" class="answer py-2"></button>
+                <!-- title -->
+                    <div class="welcome mx-auto">
+                        <h2>High Scores</h2>
                     </div>
+                    <div id="high-score-display"></div>
                 </div>
             </div>
         </div>
@@ -128,7 +99,7 @@
     <footer>
 
     </footer>
-
+    <!-- javascript -->
     <script type="text/javascript" src="./assets/js/script.js"></script>
 
 </body>

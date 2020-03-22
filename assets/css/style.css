@@ -6,7 +6,7 @@
     width: 95%;
 }
 
-#high-score {
+#high-scores {
     text-align: start;
 }
 
@@ -40,9 +40,27 @@ h1 {
     background-color: white;
     box-shadow: 5px 5px 5px lightgray;
 }
+/* ========================================================== */
+/* start screen elements */
+/* ========================================================== */
+#start-button {
+    background-color: silver;
+    text-align: center;
+    width: 20%;
+    margin-left: 40% !important;
+}
+
+.welcome {
+    width: 95%;
+}
+
+/* also used in end screen */
+h2 {
+    text-align: center;
+}
 
 /* ========================================================== */
-/* contains the formatting for the question title, questions, and answers in the quiz screen */
+/* quiz screen elements */
 /* ========================================================== */
 .question-title {
     font-size: 32px;
@@ -62,7 +80,42 @@ h1 {
 }
 
 /* ========================================================== */
-/* hide and show classes are used to switch between start screen, quiz screen, end screen, and high score screen
+/* end screen elements */
+/* ========================================================== */
+#submit-button {
+    background-color: silver;
+    width: 20%;
+    margin-left: 40% !important;
+}
+
+#initials-input {
+    width: 50%;
+    margin-left: 25% !important;
+}
+
+#final-score-message {
+    text-align: center;
+    font-size: 24px;
+}
+
+/* ========================================================== */
+/* high score screen elements */
+/* ========================================================== */
+.high-score-entry {
+    text-align: center;
+    font-size: 24px;
+}
+
+#close-button {
+    background-color: silver;
+    width: 20%;
+    margin-left: 40% !important;
+}
+
+
+
+/* ========================================================== */
+/* hide and show classes are used to switch between start screen, quiz screen, end screen, and high score screen */
 /* ========================================================== */
 .hide {
     display: none;
