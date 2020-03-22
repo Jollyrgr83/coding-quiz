@@ -1,3 +1,6 @@
+/* ========================================================== */
+/* top bar - contains the high score, timer, and main title/header elements */
+/* ========================================================== */
 .top {
     max-width: 95%;
     width: 95%;
@@ -11,19 +14,67 @@
     text-align: end;
 }
 
-body {
-    background-color: whitesmoke;
-}
-
-.quiz-area {
-    background-color: white;
-    box-shadow: 5px 5px 5px lightgray;
-}
-
 h1 {
     text-align: center;
 }
 
-h2 {
+/* ========================================================== */
+/* screen elements - contains the id tags for start-screen, quiz-screen, end-screen, and high-score-screen */
+/* ========================================================== */
+#start-screen {
+    background-color: white;
+    box-shadow: 5px 5px 5px lightgray;
+}
 
+#quiz-screen {
+    background-color: white;
+    box-shadow: 5px 5px 5px lightgray;
+}
+
+#end-screen {
+    background-color: white;
+    box-shadow: 5px 5px 5px lightgray;
+}
+
+#high-score-screen {
+    background-color: white;
+    box-shadow: 5px 5px 5px lightgray;
+}
+
+/* ========================================================== */
+/* contains the formatting for the question title, questions, and answers in the quiz screen */
+/* ========================================================== */
+.question-title {
+    font-size: 32px;
+    font-weight: bold;
+}
+
+#question {
+    font-size: 24px;
+}
+
+.answer {
+    font-size: 18px;
+    width: 100%;
+    margin: 3% 0 3% 0;
+    text-align: left;
+    padding: 15px;
+}
+
+/* ========================================================== */
+/* hide and show classes are used to switch between start screen, quiz screen, end screen, and high score screen
+/* ========================================================== */
+.hide {
+    display: none;
+}
+
+.show {
+    display: block;
+}
+ 
+/* ========================================================== */
+/* other formatting */
+/* ========================================================== */
+body {
+    background-color: whitesmoke;
 }

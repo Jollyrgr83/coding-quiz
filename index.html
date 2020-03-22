@@ -19,7 +19,7 @@
             <div class="row">
 
                 <div class="col-sm-3" id="high-score">
-                    High Score
+                    High Scores
                 </div>
 
                 <div class="col-sm-6">
@@ -40,25 +40,87 @@
 
     <main>
 
-        <div class="container m-3 p-3 mx-auto quiz-area">
 
+        <!-- start screen: this section contains the quiz instructions and start button. It should be hidden during the quiz screen, high score screen, and end screen. -->
+        
+        <div class="container m-3 mx-auto" id="start-screen">
             <div class="row">
+                <div class="col-lg-10 m-3 px-3">
+                    <div></div>
 
-                <div class="col-lg-10 m-3 p-3">
-
-                    <h2>Question <span id="question-number"></span></h2>
-
-                    <div id="question"></div>
-                    <div>a. <span id="a"></span></div>
-                    <div>b. <span id="b"></span></div>
-                    <div>c. <span id="c"></span></div>
-                    <div>d. <span id="d"></span></div>
-
+                    <div class="py-3"></div>
+                    
+                    <div>
+                        <button id="" class="answer py-2"></button>         
+                    </div>
                 </div>
-
             </div>
+        </div>
 
+        <!-- quiz screen: this section contains the quiz questions, answers, and input buttons.  It should be hidden during the start screen, end screen, and high score screen. -->
 
+        <div class="container m-3 mx-auto" id="quiz-screen">
+            <div class="row">
+                <div class="col-lg-10 m-3 px-3">
+                    <div class="question-title">Question <span id="question-number"></span></div>
+
+                    <div id="question" class="py-3"></div>
+                    
+                    <div id="answers">
+                        <button id="a" class="answer py-2"></button>
+                    
+                        <button id="b" class="answer py-2"></button>
+                    
+                        <button id="c" class="answer py-2"></button>
+                    
+                        <button id="d" class="answer py-2"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- end screen: this section contains the final score and inputs for entering high score information. It should be hidden during the start screen, quiz, and high score screen. -->
+        
+        <div class="container m-3 mx-auto" id="end-screen">
+            <div class="row">
+                <div class="col-lg-10 m-3 px-3">
+                    <div class="question-title">Question <span id="question-number"></span></div>
+
+                    <div id="question" class="py-3"></div>
+                    
+                    <div id="answers">
+                        <button id="a" class="answer py-2"></button>
+                    
+                        <button id="b" class="answer py-2"></button>
+                    
+                        <button id="c" class="answer py-2"></button>
+                    
+                        <button id="d" class="answer py-2"></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- high score screen: this section contains the high scores. It should be hidden during the start screen, quiz screen, and end screen. -->
+        
+        <div class="container m-3 mx-auto" id="high-score-screen">
+            <div class="row">
+                <div class="col-lg-10 m-3 px-3">
+                    <div class="question-title">Question <span id="question-number"></span></div>
+
+                    <div id="question" class="py-3"></div>
+                    
+                    <div id="answers">
+                        <button id="a" class="answer py-2"></button>
+                    
+                        <button id="b" class="answer py-2"></button>
+                    
+                        <button id="c" class="answer py-2"></button>
+                    
+                        <button id="d" class="answer py-2"></button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </main>
