@@ -136,6 +136,8 @@ function startScreen() {
     highScoreScreenElement.setAttribute("class", "container m-3 mx-auto hide");
     // clears timer
     clearInterval(interval);
+    // resets questionCounter to 1
+    questionCounter = 1;
     // assigns event listener to start button
     startButtonElement.addEventListener("click", function() {
         quizScreen(questionCounter);
