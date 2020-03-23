@@ -40,6 +40,12 @@ var highScoreDisplayElement = document.getElementById("high-score-display");
 var questionCounter = 1;
 // variable used to track user's score
 var userScore = 0;
+// correct sound effect
+var right = new Audio("./assets/sounds/yes.mp3");
+// incorrect sound effect
+var wrong = new Audio("./assets/sounds/no.mp3")
+
+
 // establishes object to contain quiz database (questions, answers, etc)
 var quizDatabase = {
     1: {
@@ -194,7 +200,7 @@ answersContainerElement.addEventListener("click", function(event) {
         // compares userAnswer to correctAnswer
         if (userAnswer === correctAnswer) {
             // play correct sound
-        
+            right.play();
             // add to score
             userScore = userScore + 10;
             // add 10 seconds and reset timer
@@ -219,7 +225,7 @@ answersContainerElement.addEventListener("click", function(event) {
         }
         else {
             // play incorrect sound
-        
+            wrong.play();
             // subtract from score
             userScore = userScore - 10;
             // subtract 10 seconds and reset timer
