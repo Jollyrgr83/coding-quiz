@@ -65,20 +65,36 @@ h2 {
 /* quiz screen elements */
 
 .question-title {
-    font-size: 32px;
+    font-size: 28px;
     font-weight: bold;
 }
 
 #question {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .answer-button {
-    font-size: 18px;
+    font-size: 16px;
     width: 95%;
     margin: 2% 0 2% 0;
     text-align: left;
     padding: 1.5%;
+}
+
+.right-message {
+    font-style: italic;
+    color: green;
+    font-size: 28px;
+    text-align: end;
+    margin-right: 7.5%;
+}
+
+.wrong-message {
+    font-style: italic;
+    color: tomato;
+    font-size: 28px;
+    text-align: end;
+    margin-right: 7.5%;
 }
 
 /* end screen elements */

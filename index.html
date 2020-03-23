@@ -51,8 +51,16 @@
         <div class="container p-3" id="quiz-screen">
             <div class="row">
                 <div class="col-lg-12 m-3 px-3">
-                    <!-- question title - displays the question number -->
-                    <div class="question-title">Question <span id="question-number"></span></div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <!-- question title - displays the question number -->
+                            <div class="question-title">Question <span id="question-number"></span></div>
+                        </div>
+                        <div class="col-lg-6">
+                            <!-- message - displays correct or incorrect based on user response -->
+                            <div id="message" class="right-message show">Correct!</div> 
+                        </div>
+                    </div>
                     <!-- question - displays the text of the question -->
                     <div id="question" class="py-2"></div>
                     <!-- answers section - diplays the answers and buttons -->

@@ -29,6 +29,7 @@ var aAnswerElement = document.getElementById("a");
 var bAnswerElement = document.getElementById("b");
 var cAnswerElement = document.getElementById("c");
 var dAnswerElement = document.getElementById("d");
+var messageElement = document.getElementById("message");
 // end screen elements
 var endScreenElement = document.getElementById("end-screen");
 var finalScoreElement = document.getElementById("final-score");
@@ -42,6 +43,7 @@ var clearButtonElement = document.getElementById("clear-button");
 // variables
 var secondsLeft = 30;
 var interval;
+var messageInterval;
 var questionCounter = 1;
 var userScore = 0;
 // sound files
@@ -142,6 +144,9 @@ function startScreen() {
     highScoreScreenElement.setAttribute("class", "container p-3 hide");
     headerElement.setAttribute("class", "show");
     timerElement.setAttribute("class", "container p-3 top hide");
+    // reset right/wrong message display
+    messageElement.setAttribute("class", "hide");
+    messageElement.textContent = "";
     // clears timer
     clearInterval(interval);
     // resets timer
@@ -251,6 +256,18 @@ answersContainerElement.addEventListener("click", function(event) {
         correctAnswer = quizDatabase[questionCounter].correct;
         // compares userAnswer to correctAnswer
         if (userAnswer === correctAnswer) {
+            // display right answer message for 1 seconds
+            messageElement.setAttribute("class", "right-message show");
+            messageElement.textContent = "Correct!"
+            var messageTimer = 1;
+            messageInterval = setInterval(function() {
+                messageTimer = messageTimer - 0.1;
+                if (messageTimer <= 0) {
+                    clearInterval(messageInterval);
+                    messageElement.setAttribute("class", "hide");
+                    messageElement.textContent = "";
+                }
+            }, 100);
             // play correct sound
             right.play();
             // add to score
@@ -282,6 +299,18 @@ answersContainerElement.addEventListener("click", function(event) {
             }
         }
         else {
+            // display wrong answer message for 1 seconds
+            messageElement.setAttribute("class", "wrong-message show");
+            messageElement.textContent = "Incorrect!"
+            var messageTimer = 1;
+            messageInterval = setInterval(function() {
+                messageTimer = messageTimer - 0.1;
+                if (messageTimer <= 0) {
+                    clearInterval(messageInterval);
+                    messageElement.setAttribute("class", "hide");
+                    messageElement.textContent = "";
+                }
+            }, 100);
             // play incorrect sound
             wrong.play();
             // subtract from score
