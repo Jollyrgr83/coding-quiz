@@ -1,52 +1,35 @@
-// ============================================================
-// ESTABLISH VARIABLES
-// ============================================================
-// element that contains start button
+// DOM elements
+var headerElement = document.getElementById("header");
 var startButtonElement = document.getElementById("start-button");
-// element that displays time left
+var timerElement = document.getElementById("timer");
+var closeButtonElement = document.getElementById("close-button");
+var clearButtonElement = document.getElementById("clear-button");
+var highScoresButtonElement = document.getElementById("high-scores-button");
 var timerDisplayElement = document.getElementById("timer-value");
-// variable that contains the seconds left
-var secondsLeft = 30;
-// variable used in timer
-var interval;
-// element that displays question number in quiz screen
 var questionNumberElement = document.getElementById("question-number");
-// element that displays question text in quiz screen
 var questionTextElement = document.getElementById("question");
-// elements that display answer text in button
 var aAnswerElement = document.getElementById("a");
 var bAnswerElement = document.getElementById("b");
 var cAnswerElement = document.getElementById("c");
 var dAnswerElement = document.getElementById("d");
-// element that contains the answer buttons
 var answersContainerElement = document.getElementById("answers");
-// element that contains start screen
 var startScreenElement = document.getElementById("start-screen");
-// element that contains quiz screen
 var quizScreenElement = document.getElementById("quiz-screen");
-// element that contains end screen
 var endScreenElement = document.getElementById("end-screen");
-// element that contains high score screen
 var highScoreScreenElement = document.getElementById("high-score-screen");
-// element that contains user's initial input for high score on end screen
 var initialsInputElement = document.getElementById("initials-input");
-//element that displays user's final score on end screen
 var finalScoreElement = document.getElementById("final-score");
-// element that submits high score information on end screen
 var submitButtonElement = document.getElementById("submit-button");
-// element that contains the historical high scores
 var highScoreDisplayElement = document.getElementById("high-score-display");
-// variable used to track question number
+// variables
+var secondsLeft = 30;
+var interval;
 var questionCounter = 1;
-// variable used to track user's score
 var userScore = 0;
-// correct sound effect
+// sound files
 var right = new Audio("./assets/sounds/yes.mp3");
-// incorrect sound effect
 var wrong = new Audio("./assets/sounds/no.mp3")
-
-
-// establishes object to contain quiz database (questions, answers, etc)
+// object containing quiz questions and answers
 var quizDatabase = {
     1: {
         "question": "When using the <img> tag, what does the alt attribute do?",
@@ -130,32 +113,38 @@ var quizDatabase = {
         "correct": "d"},
                       
         }
-// ============================================================
-// ESTABLISH FUNCTIONS
-// ============================================================
 // startScreen - displays welcome message and instructions and starts quizScreen when user clicks start button
 function startScreen() {
     // displays start screen by changing class on start screen div to show and others to hide
-    startScreenElement.setAttribute("class", "container m-3 mx-auto show");
-    quizScreenElement.setAttribute("class", "container m-3 mx-auto hide");
-    endScreenElement.setAttribute("class", "container m-3 mx-auto hide");
-    highScoreScreenElement.setAttribute("class", "container m-3 mx-auto hide");
+    startScreenElement.setAttribute("class", "container p-3 show");
+    quizScreenElement.setAttribute("class", "container p-3 hide");
+    endScreenElement.setAttribute("class", "container p-3 hide");
+    highScoreScreenElement.setAttribute("class", "container p-3 hide");
+    headerElement.setAttribute("class", "show");
+    timerElement.setAttribute("class", "container p-3 top hide");
+    // adds event listener to call highScoreScreen if user clicks link
+    highScoresButtonElement.addEventListener("click", function() {
+    highScoreScreen();
+    })
     // clears timer
     clearInterval(interval);
+    // resets timer
+    secondsLeft = 30;
     // resets questionCounter to 1
     questionCounter = 1;
     // assigns event listener to start button
     startButtonElement.addEventListener("click", function() {
         quizScreen(questionCounter);
         // starts timer
+        clearInterval(interval);
         interval = setInterval(function() {
-            secondsLeft--;
-            timerDisplayElement.textContent = secondsLeft;
+            secondsLeft = secondsLeft - 0.1;
+            timerDisplayElement.textContent = secondsLeft.toFixed(1);
             if (secondsLeft <= 0) {
                 endScreen(userScore);
                 clearInterval(interval);
             }
-        }, 1000);
+        }, 100);
     })
 }
 // quizScreen - displays questions and answers
@@ -163,10 +152,12 @@ function quizScreen(questionCounter) {
     // used to display question number in question title section of quiz screen
     var quizDatabaseKeyArray = Object.keys(quizDatabase);
     // displays quiz screen by changing class on quiz screen div to show and others to hide
-    quizScreenElement.setAttribute("class", "container m-3 mx-auto show");
-    startScreenElement.setAttribute("class", "container m-3 mx-auto hide");
-    endScreenElement.setAttribute("class", "container m-3 mx-auto hide");
-    highScoreScreenElement.setAttribute("class", "container m-3 mx-auto hide");
+    quizScreenElement.setAttribute("class", "container p-3 show");
+    startScreenElement.setAttribute("class", "container p-3 hide");
+    endScreenElement.setAttribute("class", "container p-3 hide");
+    highScoreScreenElement.setAttribute("class", "container p-3 hide");
+    headerElement.setAttribute("class", "hide");
+    timerElement.setAttribute("class", "container p-3 top show");
     // renders question and answers to screen
     questionNumberElement.textContent = quizDatabaseKeyArray[questionCounter - 1];
     questionTextElement.textContent = quizDatabase[questionCounter].question;
@@ -184,13 +175,13 @@ answersContainerElement.addEventListener("click", function(event) {
     // reset timer for new time
     clearInterval(interval);
     interval = setInterval(function() {
-        secondsLeft--;
-        timerDisplayElement.textContent = secondsLeft;
+        secondsLeft = secondsLeft - 0.1;
+        timerDisplayElement.textContent = secondsLeft.toFixed(1);
         if (secondsLeft <= 0) {
             endScreen(userScore);
             clearInterval(interval);
         }
-    }, 1000);
+    }, 100);
     // action on answer button click
     if (event.target.matches("button")) {
         // assigns selected button id to userAnswer
@@ -207,13 +198,13 @@ answersContainerElement.addEventListener("click", function(event) {
             clearInterval(interval);
             secondsLeft = secondsLeft + 10;
             interval = setInterval(function() {
-                secondsLeft--;
-                timerDisplayElement.textContent = secondsLeft;
+                secondsLeft = secondsLeft - 0.1;
+                timerDisplayElement.textContent = secondsLeft.toFixed(1);
                     if (secondsLeft <= 0) {
                         endScreen(userScore);
                         clearInterval(interval);
                     }
-            }, 1000);
+            }, 100);
             // increment questionCounter
             questionCounter++;
             if (questionCounter > 10) {
@@ -232,13 +223,13 @@ answersContainerElement.addEventListener("click", function(event) {
             clearInterval(interval);
             secondsLeft = secondsLeft - 10;
             interval = setInterval(function() {
-                secondsLeft--;
-                timerDisplayElement.textContent = secondsLeft;
+                secondsLeft = secondsLeft - 0.1;
+                timerDisplayElement.textContent = secondsLeft.toFixed(1);
                     if (secondsLeft <= 0) {
                         endScreen(userScore);
                         clearInterval(interval);
                     }
-            }, 1000);
+            }, 100);
             // increment questionCounter
             questionCounter++;
             if (questionCounter > 10) {
@@ -253,10 +244,12 @@ answersContainerElement.addEventListener("click", function(event) {
 // endScreen - displays end screen with user score and accepts user inputs for score and initials to update local storage
 function endScreen(userScore) {
     // displays end screen by changing class on end screen div to show and others to hide
-    endScreenElement.setAttribute("class", "container m-3 mx-auto show");
-    startScreenElement.setAttribute("class", "container m-3 mx-auto hide");
-    quizScreenElement.setAttribute("class", "container m-3 mx-auto hide");
-    highScoreScreenElement.setAttribute("class", "container m-3 mx-auto hide");    
+    endScreenElement.setAttribute("class", "container p-3 show");
+    startScreenElement.setAttribute("class", "container p-3 hide");
+    quizScreenElement.setAttribute("class", "container p-3 hide");
+    highScoreScreenElement.setAttribute("class", "container p-3 hide");    
+    headerElement.setAttribute("class", "hide");
+    timerElement.setAttribute("class", "container p-3 top hide");
     // renders high score to the screen
     finalScoreElement.textContent = userScore;    
     // assigns event listener to submit button to handle high score information
@@ -278,10 +271,11 @@ function endScreen(userScore) {
 // highScoreScreen - displays historical high scores when user clicks on high scores link in header
 function highScoreScreen() {
    // displays end screen by changing class on end screen div to show and others to hide
-   highScoreScreenElement.setAttribute("class", "container m-3 mx-auto show");
-   startScreenElement.setAttribute("class", "container m-3 mx-auto hide");
-   quizScreenElement.setAttribute("class", "container m-3 mx-auto hide");
-   endScreenElement.setAttribute("class", "container m-3 mx-auto hide");  
+   highScoreScreenElement.setAttribute("class", "container p-3 show");
+   startScreenElement.setAttribute("class", "container p-3 hide");
+   quizScreenElement.setAttribute("class", "container p-3 hide");
+   endScreenElement.setAttribute("class", "container p-3 hide");
+   timerElement.setAttribute("class", "container p-3 top hide");  
    // clear previous high score screen elements (if present)
    highScoreDisplayElement.innerHTML = "";
    // retrieve high score information from local storage
@@ -293,22 +287,10 @@ function highScoreScreen() {
     scoreElement.setAttribute("class", "high-score-entry");
     highScoreDisplayElement.appendChild(scoreElement);
    }
-   // renders close button after final high score entry
-   var closeButtonElement = document.createElement("button");
-   closeButtonElement.textContent = "Close Window";
-   closeButtonElement.setAttribute("class", "btn");
-   closeButtonElement.setAttribute("id", "close-button");
-   highScoreDisplayElement.appendChild(closeButtonElement);
-   // adds event listener to clear screen if close button is clicked
+    // adds event listener to clear screen if close button is clicked
    closeButtonElement.addEventListener("click",function() {
        startScreen();
    })
-    // renders clear high score button after final high score entry
-    var clearButtonElement = document.createElement("button");
-    clearButtonElement.textContent = "Clear High Scores";
-    clearButtonElement.setAttribute("class", "btn");
-    clearButtonElement.setAttribute("id", "clear-button");
-    highScoreDisplayElement.appendChild(clearButtonElement);
     // adds event listener to clear screen if close button is clicked
     clearButtonElement.addEventListener("click",function() {
         highScores = [];
@@ -316,15 +298,6 @@ function highScoreScreen() {
         highScoreScreen();
     })
 }
-// ============================================================
-// START SCRIPT TO RUN ON LOADING PAGE
-// ============================================================
-// calls startSceen to begin
+
+// starting script to run on initial loading
 startScreen();
-// adds event listener to call highScoreScreen if user clicks link
-document.addEventListener("click", function(event) {
-    var clickEl = event.target.id;
-    if (clickEl === "high-scores") {
-        highScoreScreen();
-    }
-})
