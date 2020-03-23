@@ -27,8 +27,8 @@ var interval;
 var questionCounter = 1;
 var userScore = 0;
 // sound files
-var right = new Audio("./assets/sounds/yes.mp3");
-var wrong = new Audio("./assets/sounds/no.mp3")
+var right = new Audio("./assets/sounds/Yes.mp3");
+var wrong = new Audio("./assets/sounds/No.mp3")
 // object containing quiz questions and answers
 var quizDatabase = {
     1: {
