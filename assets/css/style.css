@@ -112,7 +112,11 @@ h2 {
     margin-left: 40% !important;
 }
 
-
+#clear-button {
+    background-color: silver;
+    width: 20%;
+    margin-left: 40% !important;
+}
 
 /* ========================================================== */
 /* hide and show classes are used to switch between start screen, quiz screen, end screen, and high score screen */

@@ -134,6 +134,8 @@ function startScreen() {
     quizScreenElement.setAttribute("class", "container m-3 mx-auto hide");
     endScreenElement.setAttribute("class", "container m-3 mx-auto hide");
     highScoreScreenElement.setAttribute("class", "container m-3 mx-auto hide");
+    // clears timer
+    clearInterval(interval);
     // assigns event listener to start button
     startButtonElement.addEventListener("click", function() {
         quizScreen(questionCounter);
@@ -293,6 +295,18 @@ function highScoreScreen() {
    closeButtonElement.addEventListener("click",function() {
        startScreen();
    })
+    // renders clear high score button after final high score entry
+    var clearButtonElement = document.createElement("button");
+    clearButtonElement.textContent = "Clear High Scores";
+    clearButtonElement.setAttribute("class", "btn");
+    clearButtonElement.setAttribute("id", "clear-button");
+    highScoreDisplayElement.appendChild(clearButtonElement);
+    // adds event listener to clear screen if close button is clicked
+    clearButtonElement.addEventListener("click",function() {
+        highScores = [];
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+        highScoreScreen();
+    })
 }
 // ============================================================
 // START SCRIPT TO RUN ON LOADING PAGE
