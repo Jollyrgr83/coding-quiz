@@ -1,26 +1,44 @@
+// STRUCTURE
+// This script is broken into the following sections: variables, functions, event listeners, and starting script. The page consists of four main elements (start screen, quiz screen, end screen, and high score screen) and two header elements (header and timer). Only one main element should be displayed at a time. The header-header element will only be displayed when the start screen is displayed and the header-timer element will only be displayed when the quiz screen is displayed.
+
+// SEQUENCE
+// The start script (at bottom) will call startScreen which renders the start screen and header-header element and initializes variables.  Clicking the start button will call quizScreen which renders the quiz screen and header-timer element to the page.  Event listeners assigned to the answer buttons will manipulate the user's score, timer, and question counter to navigate through the quiz questions.  If one of the following is met, the endScreen function is called to render the final score and user input screen: (timer <= 0, question counter > 10).  Clicking the submit button will update local storage with high score information and call the startScreen function to render the start screen again (and initialize variables).  If the user clicks on the high scores button, the highScoreScreen function is called to render the high scores screen.  Clicking on the clear scores button will clear high scores from local storage and clicking on the close window button will call the startScreen function.
+
+// VARIABLES
+// testing
+var pushCounter = 0;
+var endScreenRunCounter = 0;
+var endScreenClickCounter = 0;
 // DOM elements
+// header-header elements
 var headerElement = document.getElementById("header");
-var startButtonElement = document.getElementById("start-button");
-var timerElement = document.getElementById("timer");
-var closeButtonElement = document.getElementById("close-button");
-var clearButtonElement = document.getElementById("clear-button");
 var highScoresButtonElement = document.getElementById("high-scores-button");
+// header-timer elements
+var timerElement = document.getElementById("timer");
 var timerDisplayElement = document.getElementById("timer-value");
+var userScoreDisplayElement = document.getElementById("user-score-display");
+// start screen elements
+var startScreenElement = document.getElementById("start-screen");
+var startButtonElement = document.getElementById("start-button");
+// quiz screen elements
+var quizScreenElement = document.getElementById("quiz-screen");
 var questionNumberElement = document.getElementById("question-number");
 var questionTextElement = document.getElementById("question");
+var answersContainerElement = document.getElementById("answers");
 var aAnswerElement = document.getElementById("a");
 var bAnswerElement = document.getElementById("b");
 var cAnswerElement = document.getElementById("c");
 var dAnswerElement = document.getElementById("d");
-var answersContainerElement = document.getElementById("answers");
-var startScreenElement = document.getElementById("start-screen");
-var quizScreenElement = document.getElementById("quiz-screen");
+// end screen elements
 var endScreenElement = document.getElementById("end-screen");
-var highScoreScreenElement = document.getElementById("high-score-screen");
-var initialsInputElement = document.getElementById("initials-input");
 var finalScoreElement = document.getElementById("final-score");
+var initialsInputElement = document.getElementById("initials-input");
 var submitButtonElement = document.getElementById("submit-button");
+// high score screen elements
+var highScoreScreenElement = document.getElementById("high-score-screen");
 var highScoreDisplayElement = document.getElementById("high-score-display");
+var closeButtonElement = document.getElementById("close-button");
+var clearButtonElement = document.getElementById("clear-button");
 // variables
 var secondsLeft = 30;
 var interval;
@@ -113,6 +131,8 @@ var quizDatabase = {
         "correct": "d"},
                       
         }
+
+// FUNCTIONS
 // startScreen - displays welcome message and instructions and starts quizScreen when user clicks start button
 function startScreen() {
     // displays start screen by changing class on start screen div to show and others to hide
@@ -122,30 +142,12 @@ function startScreen() {
     highScoreScreenElement.setAttribute("class", "container p-3 hide");
     headerElement.setAttribute("class", "show");
     timerElement.setAttribute("class", "container p-3 top hide");
-    // adds event listener to call highScoreScreen if user clicks link
-    highScoresButtonElement.addEventListener("click", function() {
-    highScoreScreen();
-    })
     // clears timer
     clearInterval(interval);
     // resets timer
     secondsLeft = 30;
     // resets questionCounter to 1
     questionCounter = 1;
-    // assigns event listener to start button
-    startButtonElement.addEventListener("click", function() {
-        quizScreen(questionCounter);
-        // starts timer
-        clearInterval(interval);
-        interval = setInterval(function() {
-            secondsLeft = secondsLeft - 0.1;
-            timerDisplayElement.textContent = secondsLeft.toFixed(1);
-            if (secondsLeft <= 0) {
-                endScreen(userScore);
-                clearInterval(interval);
-            }
-        }, 100);
-    })
 }
 // quizScreen - displays questions and answers
 function quizScreen(questionCounter) {
@@ -158,6 +160,8 @@ function quizScreen(questionCounter) {
     highScoreScreenElement.setAttribute("class", "container p-3 hide");
     headerElement.setAttribute("class", "hide");
     timerElement.setAttribute("class", "container p-3 top show");
+    // displays user score
+    userScoreDisplayElement.textContent = userScore;
     // renders question and answers to screen
     questionNumberElement.textContent = quizDatabaseKeyArray[questionCounter - 1];
     questionTextElement.textContent = quizDatabase[questionCounter].question;
@@ -166,7 +170,63 @@ function quizScreen(questionCounter) {
     cAnswerElement.textContent = "c. " + quizDatabase[questionCounter].answers.c;
     dAnswerElement.textContent = "d. " + quizDatabase[questionCounter].answers.d;
 }
-// event listener for answer buttons to accept user's answers, update timer, update score, and call endScreen
+// endScreen - displays end screen with user score and accepts user inputs for score and initials to update local storage
+function endScreen(userScore) {
+    console.log("endScreenRunCounter", endScreenRunCounter);
+    endScreenRunCounter++;
+    // displays end screen by changing class on end screen div to show and others to hide
+    endScreenElement.setAttribute("class", "container p-3 show");
+    startScreenElement.setAttribute("class", "container p-3 hide");
+    quizScreenElement.setAttribute("class", "container p-3 hide");
+    highScoreScreenElement.setAttribute("class", "container p-3 hide");    
+    headerElement.setAttribute("class", "hide");
+    timerElement.setAttribute("class", "container p-3 top hide");
+    // renders high score to the screen
+    finalScoreElement.textContent = userScore;    
+    return;
+}
+// highScoreScreen - displays historical high scores when user clicks on high scores link in header
+function highScoreScreen() {
+    // displays end screen by changing class on end screen div to show and others to hide
+    highScoreScreenElement.setAttribute("class", "container p-3 show");
+    startScreenElement.setAttribute("class", "container p-3 hide");
+    quizScreenElement.setAttribute("class", "container p-3 hide");
+    endScreenElement.setAttribute("class", "container p-3 hide");
+    timerElement.setAttribute("class", "container p-3 top hide");  
+    // clear previous high score screen elements (if present)
+    highScoreDisplayElement.innerHTML = "";
+    // retrieve high score information from local storage
+    var highScores = JSON.parse(localStorage.getItem("highScores"));
+    // render scores on high score screen
+    for (let i = 0; i < highScores.length; i++) {
+        var scoreElement = document.createElement("div");
+        scoreElement.textContent = highScores[i].initials + " : " + highScores[i].score;
+        scoreElement.setAttribute("class", "high-score-entry");
+        highScoreDisplayElement.appendChild(scoreElement);
+    }
+}
+
+// EVENT LISTENERS
+// assigns event listener to start button
+startButtonElement.addEventListener("click", function() {
+    // resets userScore to 0
+    userScore = 0;
+    // renders questions
+    quizScreen(questionCounter);
+    // starts timer
+    clearInterval(interval);
+    interval = setInterval(function() {
+        secondsLeft = secondsLeft - 0.1;
+        timerDisplayElement.textContent = secondsLeft.toFixed(1);
+        if (secondsLeft <= 0) {
+            console.log("startScreen 01");
+            endScreen(userScore);
+            clearInterval(interval);
+            return;
+        }
+    }, 100);
+})
+// answer button event listener - capture user answer, update timer, update score, and call endScreen
 answersContainerElement.addEventListener("click", function(event) {
     // used to store user's answer (a, b, c, or d) to compare against correct answer
     var userAnswer;
@@ -178,6 +238,7 @@ answersContainerElement.addEventListener("click", function(event) {
         secondsLeft = secondsLeft - 0.1;
         timerDisplayElement.textContent = secondsLeft.toFixed(1);
         if (secondsLeft <= 0) {
+            console.log("answers EL main timer");
             endScreen(userScore);
             clearInterval(interval);
         }
@@ -194,21 +255,27 @@ answersContainerElement.addEventListener("click", function(event) {
             right.play();
             // add to score
             userScore = userScore + 10;
+            // update score display
+            userScoreDisplayElement.textContent = userScore;
             // add 10 seconds and reset timer
             clearInterval(interval);
             secondsLeft = secondsLeft + 10;
             interval = setInterval(function() {
                 secondsLeft = secondsLeft - 0.1;
                 timerDisplayElement.textContent = secondsLeft.toFixed(1);
-                    if (secondsLeft <= 0) {
+                if (secondsLeft <= 0) {
+                        console.log("answers EL right answer timer");
                         endScreen(userScore);
                         clearInterval(interval);
+                        return;
                     }
-            }, 100);
-            // increment questionCounter
+                }, 100);
+                // increment questionCounter
             questionCounter++;
             if (questionCounter > 10) {
+                console.log("answers EL right answer QC");
                 endScreen(userScore);
+                return;
             }
             else {
                 quizScreen(questionCounter);
@@ -219,21 +286,27 @@ answersContainerElement.addEventListener("click", function(event) {
             wrong.play();
             // subtract from score
             userScore = userScore - 10;
+            // update score display
+            userScoreDisplayElement.textContent = userScore;
             // subtract 10 seconds and reset timer
             clearInterval(interval);
             secondsLeft = secondsLeft - 10;
             interval = setInterval(function() {
                 secondsLeft = secondsLeft - 0.1;
                 timerDisplayElement.textContent = secondsLeft.toFixed(1);
-                    if (secondsLeft <= 0) {
+                if (secondsLeft <= 0) {
+                    console.log("answers EL wrong answer timer");
                         endScreen(userScore);
                         clearInterval(interval);
+                        return;
                     }
-            }, 100);
-            // increment questionCounter
+                }, 100);
+                // increment questionCounter
             questionCounter++;
             if (questionCounter > 10) {
+                console.log("answer EL wrong answer QC");
                 endScreen(userScore);
+                return;
             }
             else {
                 quizScreen(questionCounter);
@@ -241,63 +314,47 @@ answersContainerElement.addEventListener("click", function(event) {
         }
     }
 })
-// endScreen - displays end screen with user score and accepts user inputs for score and initials to update local storage
-function endScreen(userScore) {
-    // displays end screen by changing class on end screen div to show and others to hide
-    endScreenElement.setAttribute("class", "container p-3 show");
-    startScreenElement.setAttribute("class", "container p-3 hide");
-    quizScreenElement.setAttribute("class", "container p-3 hide");
-    highScoreScreenElement.setAttribute("class", "container p-3 hide");    
-    headerElement.setAttribute("class", "hide");
-    timerElement.setAttribute("class", "container p-3 top hide");
-    // renders high score to the screen
-    finalScoreElement.textContent = userScore;    
-    // assigns event listener to submit button to handle high score information
-    submitButtonElement.addEventListener("click", function() {
-        // retrieves high scores from local storage
-        var highScores = JSON.parse(localStorage.getItem("highScores"));
-        if (highScores === null) {
-            highScores = [];
-        }
-        // adds initials and score to highScores
-        var initials = initialsInputElement.value.trim();
-        var score = userScore;
-        highScores.push({"initials": initials, "score": score});
-        // stores highScores in local storage
-        localStorage.setItem("highScores", JSON.stringify(highScores));
-        startScreen();
-    });
-}
-// highScoreScreen - displays historical high scores when user clicks on high scores link in header
-function highScoreScreen() {
-   // displays end screen by changing class on end screen div to show and others to hide
-   highScoreScreenElement.setAttribute("class", "container p-3 show");
-   startScreenElement.setAttribute("class", "container p-3 hide");
-   quizScreenElement.setAttribute("class", "container p-3 hide");
-   endScreenElement.setAttribute("class", "container p-3 hide");
-   timerElement.setAttribute("class", "container p-3 top hide");  
-   // clear previous high score screen elements (if present)
-   highScoreDisplayElement.innerHTML = "";
-   // retrieve high score information from local storage
-   var highScores = JSON.parse(localStorage.getItem("highScores"));
-   // render scores on high score screen
-   for (let i = 0; i < highScores.length; i++) {
-    var scoreElement = document.createElement("div");
-    scoreElement.textContent = highScores[i].initials + " : " + highScores[i].score;
-    scoreElement.setAttribute("class", "high-score-entry");
-    highScoreDisplayElement.appendChild(scoreElement);
-   }
-    // adds event listener to clear screen if close button is clicked
-   closeButtonElement.addEventListener("click",function() {
-       startScreen();
-   })
-    // adds event listener to clear screen if close button is clicked
-    clearButtonElement.addEventListener("click",function() {
+// high score button event listener - call highScoreScreen to display high scores
+highScoresButtonElement.addEventListener("click", function() {
+highScoreScreen();
+})
+// close button event listener - call startScreen to close high score screen
+closeButtonElement.addEventListener("click",function() {
+    startScreen();
+    return;
+})
+// clear button event listener - clears high scores in page and local storage and re-renders high score screen
+clearButtonElement.addEventListener("click",function() {
+    highScores = [];
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    highScoreScreen();
+    return;
+})
+// submit button event listener - capture user initials, update high scores, and call startScreen
+submitButtonElement.addEventListener("click", function(event) {
+    console.log("endScreenClickCounter", endScreenClickCounter);
+    console.log("click timestamp", event.timeStamp);
+    endScreenClickCounter++;        
+    event.preventDefault();
+    // retrieves high scores from local storage
+    var highScores = JSON.parse(localStorage.getItem("highScores"));
+    if (highScores === null) {
         highScores = [];
-        localStorage.setItem("highScores", JSON.stringify(highScores));
-        highScoreScreen();
-    })
-}
+    }
+    // adds initials and score to highScores
+    var initials = initialsInputElement.value.trim();
+    var score = userScore;
+    console.log("pushCounter", pushCounter);
+    console.log("pre-push", highScores);
+    highScores.push({"initials": initials, "score": score});
+    console.log("post-push", highScores);
+    pushCounter++;
+    // stores highScores in local storage
+    localStorage.setItem("highScores", JSON.stringify(highScores));
+    startScreen();
+    return;
+});
 
+// STARTING SCRIPT
 // starting script to run on initial loading
 startScreen();

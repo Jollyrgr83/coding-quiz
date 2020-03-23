@@ -24,9 +24,10 @@
                 </div>
             </div>
         </div>
-        <!-- timer contains the timer element - hidden during start, high score, and end screens-->
+        <!-- timer contains the timer element and user score display - hidden during start, high score, and end screens-->
         <div id="timer" class="container p-3 top">
             <h1>Timer: <span id="timer-value"></span></h1>
+            <h2>Score: <span id="user-score-display"></span></h2>
         </div>
     </header>
     <main>
@@ -77,7 +78,7 @@
                             <input type="text" placeholder="please enter your initials" id="initials-input" class="py-3"/>
                         </div>
                         <div class="py-3">
-                            <button type="submit" id="submit-button" class="btn">Submit</button>         
+                            <button id="submit-button" class="btn">Submit</button>         
                         </div>
                     </div>
                 </div>
@@ -93,7 +94,7 @@
                     </div>
                     <div id="high-score-display"></div>
                     <div id="buttons" class="p-3 text-center">
-                        <button id="clear-button" class="btn m-3">Clear High Scores</button>
+                        <button id="clear-button" class="btn m-3">Clear Scores</button>
                         <button id="close-button" class="btn m-3">Close Window</button>
                     </div>
                 </div>
