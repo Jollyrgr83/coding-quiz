@@ -23,24 +23,28 @@ h1 {
     background-color: white;
     box-shadow: 5px 5px 5px lightgray;
     margin-top: 10%;
+    border-radius: 2.5%;
 }
 
 #quiz-screen {
     background-color: white;
     box-shadow: 5px 5px 5px lightgray;
     margin-top: 0;
+    border-radius: 2.5%;
 }
 
 #end-screen {
     background-color: white;
     box-shadow: 5px 5px 5px lightgray;
     margin-top: 7.5%;
+    border-radius: 2.5%;
 }
 
 #high-score-screen {
     background-color: white;
     box-shadow: 5px 5px 5px lightgray;
     margin-top: 7.5%;
+    border-radius: 2.5%;
 }
 
 /* start screen elements */
