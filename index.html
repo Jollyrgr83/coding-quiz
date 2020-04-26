@@ -6,88 +6,70 @@
     <title>Quiz | Coding Knowledge</title>
     <!-- bootstrap style sheet -->
     <link rel="stylesheet" type="text/css" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+        <!-- Google fonts -->
+        <link href="https://fonts.googleapis.com/css2?family=Architects+Daughter&family=Indie+Flower&family=Swanky+and+Moo+Moo&family=Open+Sans&display=swap" rel="stylesheet"/>
     <!-- local style sheet -->
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css"/>
 </head>
-<body>
+<body class="background-img">
     <header>
         <!-- header id contains high score button and title - hidden during quiz, high score, and end screens-->
-        <div id="header" class="container p-3 top">
-            <div class="row m-5">
-                <!-- high scores button -->
-                <div class="col-sm-3">
-                    <button id="high-scores-button" class="btn">High Scores</button>
-                </div>
-                <!-- title -->
-                <div class="col-sm-6">                 
-                    <h1>Coding Knowledge Quiz</h1>
+        <div id="header" class="container p-3">
+            <!-- timer contains the timer element and user score display - hidden during start, high score, and end screens-->
+            <div id="timer" class="col-sm-8 mx-auto">
+                <div class="row">
+                    <p id="timerContainer" class="col-sm-4 mx-auto header-text">Timer: <span id="timer-value"></span></p>
+                    <p id="scoreContainer" class="col-sm-4 mx-auto header-text">Score: <span id="user-score-display"></span></p>
                 </div>
             </div>
-        </div>
-        <!-- timer contains the timer element and user score display - hidden during start, high score, and end screens-->
-        <div id="timer" class="container p-3 top">
-            <h1>Timer: <span id="timer-value"></span></h1>
-            <h2>Score: <span id="user-score-display"></span></h2>
         </div>
     </header>
     <main>
         <!-- start screen contains the quiz instructions and start button -  hidden during the quiz, high score, and end screens -->      
         <div class="container p-3" id="start-screen">
-            <div class="row">
-                <div class="col-lg-12 m-3 mx-auto px-3">
-                    <!-- welcome message and instructions -->
-                    <div class="welcome mx-auto">
-                        <h2>Welcome to the Coding Quiz</h2>
-                        <p>You will be asked 10 questions to test your coding knowledge. Correct answers will add 10 points to your score and 10 seconds to your remaining time. Incorrect answers will subtract 10 points from your score and 10 seconds from your remaining time.  Press the start button to begin.</p>
-                        <!-- start button -->
-                        <div class="mx-auto">
-                        <button id="start-button" class="btn mx-auto">Start</button>         
-                        </div>
-                    </div>
+                <div class="col-sm-8 rectangle mx-auto">
+                    <h1>Coding Quiz</h1>
+                    <p class="rectangle-text">You will be asked 10 questions to test your coding knowledge. Correct answers will add 10 points to your score and 10 seconds to your remaining time. Incorrect answers will subtract 10 points from your score and 10 seconds from your remaining time.  Press the start button to begin.</p>
+                </div>
+                <div class="col-sm-8 mx-auto text-center">
+                    <button id="start-button" class="btn round mx-auto">Start</button>
+                    <button id="high-scores-button" class="btn round mx-auto">High Scores</button>
                 </div>
             </div>
         </div>
         <!-- quiz screen contains the quiz questions, answers, and input buttons - hidden during the start, end, and high score screens -->
         <div class="container p-3" id="quiz-screen">
             <div class="row">
-                <div class="col-lg-12 m-3 px-3">
+                <div class="col-sm-8 rectangle mx-auto">
                     <div class="row">
-                        <div class="col-lg-6">
-                            <!-- question title - displays the question number -->
-                            <div class="question-title">Question <span id="question-number"></span></div>
-                        </div>
-                        <div class="col-lg-6">
-                            <!-- message - displays correct or incorrect based on user response -->
-                            <div id="message" class="right-message show">Correct!</div> 
-                        </div>
+                        <div class="question-title">Question <span id="question-number"></span></div>
+                        <p id="message" class="question-message right hide"></p>
                     </div>
                     <!-- question - displays the text of the question -->
-                    <div id="question" class="py-2"></div>
+                    <div id="question" class="rectangle-text"></div>
                     <!-- answers section - diplays the answers and buttons -->
-                    <div id="answers" class="p-3">
-                        <button id="a" class="answer-button"></button>
-                        <button id="b" class="answer-button"></button>
-                        <button id="c" class="answer-button"></button>
-                        <button id="d" class="answer-button"></button>
+                    <div id="answers">
+                        <button id="a" class="btn question-btn"></button>
+                        <button id="b" class="btn question-btn"></button>
+                        <button id="c" class="btn question-btn"></button>
+                        <button id="d" class="btn question-btn"></button>
                     </div>
                 </div>
             </div>
         </div>
         <!-- end screen contains the final score and high score inputs - hidden during the start, quiz, and high score screens -->        
         <div class="container p-3" id="end-screen">
-            <div class="row mx-auto">
-                <div class="col-lg-12 p-3">
-                     <!-- congratulations message and score -->
-                     <div class="mx-auto">
-                        <h2>Congratulations!</h2>
-                        <p id="final-score-message">You finished with a final score of: <span id="final-score"></span></p>
-                        <!-- high score inputs -->
-                        <div>
-                            <input type="text" placeholder="please enter your initials" id="initials-input" class="py-3"/>
-                        </div>
-                        <div class="py-3">
-                            <button id="submit-button" class="btn">Submit</button>         
-                        </div>
+            <div class="row">
+                <div class="col-sm-8 rectangle mx-auto">
+                    <h2>Congratulations!</h2>
+                    <p id="final-score-message" class="rectangle-text text-center">You finished with a final score of: <span id="final-score"></span></p>
+                    <!-- high score inputs -->
+                    <div class="text-center">
+                        <input type="text" placeholder="please enter your initials" id="initials-input" class="initials mx-auto"/>
+                    </div>
+                    <div class="text-center">
+                        <button id="submit-button" class="btn round">Submit</button>         
+                    </div>
                     </div>
                 </div>
             </div>
@@ -95,15 +77,12 @@
         <!-- high score screen contains the high scores - hidden during the start, quiz, and end screens -->   
         <div class="container p-3" id="high-score-screen">
             <div class="row">
-                <div class="col-lg-12 px-3">
-                <!-- title -->
-                    <div>
-                        <h2>High Scores</h2>
-                    </div>
+                <div class="col-sm-8 rectangle mx-auto">
+                    <h2>High Scores</h2>
                     <div id="high-score-display"></div>
-                    <div id="buttons" class="p-3 text-center">
-                        <button id="clear-button" class="btn m-3">Clear Scores</button>
-                        <button id="close-button" class="btn m-3">Close Window</button>
+                    <div class="text-center">
+                        <button id="clear-button" class="btn round">Clear Scores</button>
+                        <button id="close-button" class="btn round">Close Window</button>
                     </div>
                 </div>
             </div>

@@ -1,142 +1,161 @@
-/* header elements */
+/* Google fonts 
+font-family: 'Indie Flower', cursive;
+font-family: 'Architects Daughter', cursive;
+font-family: 'Swanky and Moo Moo', cursive;
+font-family: 'Open Sans', sans-serif; */
 
-.top {
-    width: 95%;
+/* background image */
+.background-img {
+    background-image: url("../images/background.jpg");
+    height: 1500px;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: lightseagreen;
 }
 
-#timer {
+/* used for container elements */
+.rectangle {
+    background-color: lightslategray;
+    box-shadow: 5px 5px 15px black;
+    border-radius: 15px;
+    margin: 1%;
+    padding: 2.5%;
+    width: 90%;
+}
+
+.header-text {
+    font-family: "Open Sans", sans-serif;
+    font-size: 16pt;
     text-align: center;
+    margin: 2.5% 1% 2.5% 1%;
+    padding: 1%;
+    width: 90%;
+    border-radius: 40px;
+    background-color: whitesmoke;
+    color: steelblue;
+    border: solid 2pt steelblue;
+}
+.red {
+    background-color: red;
+    color: whitesmoke;
+    /* font-family: "Open Sans", sans-serif; */
+}
+.green {
+    background-color: green;
+    color: whitesmoke;
+    /* font-family: "Open Sans", sans-serif; */
+}
+
+.round {
+    border-radius: 40px;
+    width: 300px;
+    max-width: 45%;
+    margin: 2.5%;
+    padding: 1%;
+    color: white;
+    background-color: steelblue;
+    font-family: "Indie Flower", cursive;
+    font-size: 22px;
+}
+.round:hover {
+    border-radius: 40px;
+    width: 300px;
+    max-width: 45%;
+    margin: 2.5%;
+    padding: 1%;
+    color: white;
+    background-color: blue;
+    font-family: "Indie Flower", cursive;
+    font-size: 22px;
 }
 
 h1 {
+    font-family: "Architects Daughter", cursive;
+    font-size: 18pt;
+    color: whitesmoke;
     text-align: center;
 }
-
-#high-scores-button {
-    background-color: silver;
-    width: 50%;
-}
-
-/* screen elements - contains the id tags for start-screen, quiz-screen, end-screen, and high-score-screen */
-
-#start-screen {
-    background-color: white;
-    box-shadow: 5px 5px 5px lightgray;
-    margin-top: 10%;
-    border-radius: 2.5%;
-}
-
-#quiz-screen {
-    background-color: white;
-    box-shadow: 5px 5px 5px lightgray;
-    margin-top: 0;
-    border-radius: 2.5%;
-}
-
-#end-screen {
-    background-color: white;
-    box-shadow: 5px 5px 5px lightgray;
-    margin-top: 7.5%;
-    border-radius: 2.5%;
-}
-
-#high-score-screen {
-    background-color: white;
-    box-shadow: 5px 5px 5px lightgray;
-    margin-top: 7.5%;
-    border-radius: 2.5%;
-}
-
-/* start screen elements */
-
-#start-button {
-    background-color: silver;
-    text-align: center;
-    width: 20%;
-    margin-left: 40% !important;
-}
-
-.welcome {
-    width: 95%;
-}
-
-/* also used in end screen */
 h2 {
+    font-family: "Architects Daughter", cursive;
+    font-size: 18pt;
+    color: whitesmoke;
     text-align: center;
 }
+.rectangle-text {
+    font-family: "Open Sans", sans-serif;
+    font-size: 11pt;
+    color: whitesmoke;
+    margin: 10px 10px 10px 10px;
+    padding: 5px 10px 5px 10px;
+}
 
-
-/* quiz screen elements */
-
+.question-btn {
+    border-radius: 40px;
+    width: 100%;
+    /* max-width: 90%; */
+    margin: 2.5%;
+    padding: 2.5%;
+    color: white;
+    background-color: steelblue;
+    font-family: "Open Sans", sans-serif;
+    font-size: 11pt;
+    text-align: start;
+}
+.question-btn:hover {
+    border-radius: 40px;
+    width: 100%;
+    /* max-width: 90%; */
+    margin: 2.5%;
+    padding: 2.5%;
+    color: white;
+    background-color: blue;
+    font-family: "Indie Flower", cursive;
+    font-size: 14pt;
+    text-align: start;
+}
 .question-title {
-    font-size: 28px;
-    font-weight: bold;
+    font-family: "Architects Daughter", cursive;
+    font-size: 18pt;
+    text-align: start;
+    /* width: 45%; */
+    padding: 5px 10px 5px 10px;
+    margin: 0 10px 0 10px;
+    border-radius: 40px;
+    background-color: whitesmoke;
+    color: steelblue;
+    border: solid 2pt steelblue;
 }
 
-#question {
-    font-size: 20px;
+.question-message {
+    font-family: "Architects Daughter", cursive;
+    font-size: 18pt;
+    text-align: center;
+    padding: 5px 10px 5px 10px;
+    margin: 0 10px 0 10px;
+    border-radius: 40px;
+    color: whitesmoke;
+    width: 100%;
+    max-width: 45%;
+}
+.right {
+    background-color: green;
+}
+.wrong {
+    background-color: red;
 }
 
-.answer-button {
-    font-size: 16px;
-    width: 95%;
-    margin: 2% 0 2% 0;
-    text-align: left;
-    padding: 1.5%;
-}
-
-.right-message {
-    font-style: italic;
-    color: green;
-    font-size: 28px;
-    text-align: end;
-    margin-right: 7.5%;
-}
-
-.wrong-message {
-    font-style: italic;
-    color: tomato;
-    font-size: 28px;
-    text-align: end;
-    margin-right: 7.5%;
-}
-
-/* end screen elements */
-
-#submit-button {
-    background-color: silver;
-    width: 20%;
-    margin-left: 40% !important;
-}
-
-#initials-input {
+.initials {
+    font-family: "Architects Daughter", cursive;
+    font-size: 11pt;
+    text-align: start;
     width: 50%;
-    margin-left: 25% !important;
-    text-align: center;
+    padding: 5px 10px 5px 10px;
+    margin: 0 10px 0 10px;
+    border-radius: 40px;
+    background-color: whitesmoke;
 }
-
-#final-score-message {
-    text-align: center;
-    font-size: 24px;
-}
-
-/* high score screen elements */
-
-.high-score-entry {
-    text-align: center;
-    font-size: 24px;
-}
-
-#close-button {
-    background-color: silver;
-    width: 20%;
-}
-
-#clear-button {
-    background-color: silver;
-    width: 20%;
-}
-
 
 /* hide and show classes are used to switch between start screen, quiz screen, end screen, and high score screen */
 
@@ -146,10 +165,4 @@ h2 {
 
 .show {
     display: block;
-}
- 
-/* other formatting */
-
-body {
-    background-color: whitesmoke;
 }

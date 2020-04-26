@@ -17,6 +17,8 @@ var highScoresButtonElement = document.getElementById("high-scores-button");
 var timerElement = document.getElementById("timer");
 var timerDisplayElement = document.getElementById("timer-value");
 var userScoreDisplayElement = document.getElementById("user-score-display");
+var timerContainer = document.getElementById("timerContainer");
+var scoreContainer = document.getElementById("scoreContainer");
 // start screen elements
 var startScreenElement = document.getElementById("start-screen");
 var startButtonElement = document.getElementById("start-button");
@@ -142,11 +144,13 @@ function startScreen() {
     quizScreenElement.setAttribute("class", "container p-3 hide");
     endScreenElement.setAttribute("class", "container p-3 hide");
     highScoreScreenElement.setAttribute("class", "container p-3 hide");
-    headerElement.setAttribute("class", "show");
-    timerElement.setAttribute("class", "container p-3 top hide");
+    headerElement.setAttribute("class", "container p-3 hide");
+    timerElement.setAttribute("class", "col-sm-8 mx-auto hide");
     // reset right/wrong message display
-    messageElement.setAttribute("class", "hide");
+    messageElement.setAttribute("class", "question-message hide");
     messageElement.textContent = "";
+    timerContainer.setAttribute("class", "col-sm-4 mx-auto header-text");
+    scoreContainer.setAttribute("class", "col-sm-4 mx-auto header-text");
     // clears timer
     clearInterval(interval);
     // resets timer
@@ -163,8 +167,8 @@ function quizScreen(questionCounter) {
     startScreenElement.setAttribute("class", "container p-3 hide");
     endScreenElement.setAttribute("class", "container p-3 hide");
     highScoreScreenElement.setAttribute("class", "container p-3 hide");
-    headerElement.setAttribute("class", "hide");
-    timerElement.setAttribute("class", "container p-3 top show");
+    headerElement.setAttribute("class", "container p-3 show");
+    timerElement.setAttribute("class", "col-sm-8 mx-auto show");
     // displays user score
     userScoreDisplayElement.textContent = userScore;
     // renders question and answers to screen
@@ -184,8 +188,8 @@ function endScreen(userScore) {
     startScreenElement.setAttribute("class", "container p-3 hide");
     quizScreenElement.setAttribute("class", "container p-3 hide");
     highScoreScreenElement.setAttribute("class", "container p-3 hide");    
-    headerElement.setAttribute("class", "hide");
-    timerElement.setAttribute("class", "container p-3 top hide");
+    headerElement.setAttribute("class", "container p-3 hide");
+    timerElement.setAttribute("class", "col-sm-8 mx-auto hide");
     // renders high score to the screen
     finalScoreElement.textContent = userScore;    
     return;
@@ -197,7 +201,7 @@ function highScoreScreen() {
     startScreenElement.setAttribute("class", "container p-3 hide");
     quizScreenElement.setAttribute("class", "container p-3 hide");
     endScreenElement.setAttribute("class", "container p-3 hide");
-    timerElement.setAttribute("class", "container p-3 top hide");  
+    timerElement.setAttribute("class", "col-sm-8 mx-auto hide");  
     // clear previous high score screen elements (if present)
     highScoreDisplayElement.innerHTML = "";
     // retrieve high score information from local storage
@@ -206,7 +210,7 @@ function highScoreScreen() {
     for (let i = 0; i < highScores.length; i++) {
         var scoreElement = document.createElement("div");
         scoreElement.textContent = highScores[i].initials + " : " + highScores[i].score;
-        scoreElement.setAttribute("class", "high-score-entry");
+        scoreElement.setAttribute("class", "rectangle-text");
         highScoreDisplayElement.appendChild(scoreElement);
     }
 }
@@ -256,16 +260,20 @@ answersContainerElement.addEventListener("click", function(event) {
         correctAnswer = quizDatabase[questionCounter].correct;
         // compares userAnswer to correctAnswer
         if (userAnswer === correctAnswer) {
-            // display right answer message for 1 seconds
-            messageElement.setAttribute("class", "right-message show");
+            // display right answer message and change timer/score display for 1 seconds
+            messageElement.setAttribute("class", "question-message right show");
             messageElement.textContent = "Correct!"
-            var messageTimer = 1;
+            timerContainer.setAttribute("class", "col-sm-4 mx-auto header-text green");
+            scoreContainer.setAttribute("class", "col-sm-4 mx-auto header-text green");
+            var messageTimer = 1.5;
             messageInterval = setInterval(function() {
                 messageTimer = messageTimer - 0.1;
                 if (messageTimer <= 0) {
                     clearInterval(messageInterval);
-                    messageElement.setAttribute("class", "hide");
+                    messageElement.setAttribute("class", "question-message hide");
                     messageElement.textContent = "";
+                    timerContainer.setAttribute("class", "col-sm-4 mx-auto header-text");
+                    scoreContainer.setAttribute("class", "col-sm-4 mx-auto header-text");
                 }
             }, 100);
             // play correct sound
@@ -299,16 +307,20 @@ answersContainerElement.addEventListener("click", function(event) {
             }
         }
         else {
-            // display wrong answer message for 1 seconds
-            messageElement.setAttribute("class", "wrong-message show");
-            messageElement.textContent = "Incorrect!"
-            var messageTimer = 1;
+            // display wrong answer message and update timer/score displays for 1 seconds
+            messageElement.setAttribute("class", "question-message wrong show");
+            messageElement.textContent = "Incorrect!";
+            timerContainer.setAttribute("class", "col-sm-4 mx-auto header-text red");
+            scoreContainer.setAttribute("class", "col-sm-4 mx-auto header-text red");
+            var messageTimer = 1.5;
             messageInterval = setInterval(function() {
                 messageTimer = messageTimer - 0.1;
                 if (messageTimer <= 0) {
                     clearInterval(messageInterval);
-                    messageElement.setAttribute("class", "hide");
+                    messageElement.setAttribute("class", "question-message hide");
                     messageElement.textContent = "";
+                    timerContainer.setAttribute("class", "col-sm-4 mx-auto header-text");
+                    scoreContainer.setAttribute("class", "col-sm-4 mx-auto header-text");
                 }
             }, 100);
             // play incorrect sound
