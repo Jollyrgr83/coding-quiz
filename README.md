@@ -4,22 +4,22 @@ This project is a quiz with 10 questions concerning common coding knowledge.
 
 <https://jollyrgr83.github.io/coding-quiz/>
 
-# Requirements
+## Requirements
 This project was designed to be used on any web browser.
 
-# Installation
+## Installation
 This project does not require installation.
 
-# Technology/Framework
+## Technology/Framework
 This project was created using bootstrap, html, css, and javascript.
 
-# How to Use
+## How to Use
 Click the start button to begin.  Answer questions by selecting the correct answer from the available choices.  Incorrect responses will subtract from your score and your available time.  To view high scores, click the high scores link in the upper left corner.
 
-# Credits
+## Credits
 I would like to thank all the instructors, TAs, and staff at the University of Utah Coding Bootcamp for the instruction, curriculum, inspiration, and other support provided to assist me in the creation of this project.
 
-# License
+## License
 Released under MIT License
 
 Copyright (c) 2020 Jason Mangin
